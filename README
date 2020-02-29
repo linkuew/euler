@@ -1,6 +1,8 @@
 # euler projects
 
-# Repo contains solutions to the popular problems listed taken from https://projecteuler.net/about
+# Repo contains some solutions to the popular problems listed taken from https://projecteuler.net/about
+# excluding very high number solutions - some proof of correctness might be provided, but the solution
+# itself 
 
 # Through the course of solving, various languages will be used - most likely 5-10 problems per language
 
