@@ -1,16 +1,21 @@
 # Just a temp makefile, will have to update it to be more streamlined
 # in the future
+CO=gcc -g -Wall
+elem=prob1 prob2 prob3 prob4
 
-all: prob1 prob2 prob3
+all: $(elem)
 
 prob1:
-	gcc -g -Wall prob1.c -o one
+	$(CO) prob1.c -o one
 
 prob2:
-	gcc -g -Wall prob2.c -o two
+	$(CO) prob2.c -o two
 
 prob3:
-	gcc -g -Wall prob3.c -o three
+	$(CO) prob3.c -o three
+
+prob4:
+	$(CO) prob4.c -o four -lm
 
 clean:
-	rm one two three
+	rm one two three four
