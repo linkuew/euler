@@ -1,12 +1,16 @@
-targets=prob13 prob15
+targets=prob12 prob13 prob15
+flags=-g -Wall
 
 all: $(targets)
 
+prob12:
+	g++ $(flags) prob12.cpp -o twel
+
 prob13:
-	g++ -g -Wall prob13.cpp -lgmp -lgmpxx -o thirteen
+	g++ $(flags) prob13.cpp -lgmp -lgmpxx -o thirteen
 
 prob15:
-	g++ -g -Wall prob15.cpp -o fif
+	g++ $(flags) prob15.cpp -o fif
 
 clean:
-	rm thirteen fif
+	rm twel thirteen fif

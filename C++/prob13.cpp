@@ -18,7 +18,8 @@
 #include<gmp.h>
 
 using namespace std;
-int main(void) {
+int main(void)
+{
         // not a confusing name at all
         string num;
         fstream file;
