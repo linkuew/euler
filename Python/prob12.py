@@ -1,27 +1,33 @@
-# Since these are triangle numbers, we'll take Gauss' childhood
-# techniques for this problem, thereby finding the two middle divisors.
-# From these two middle divisors, we use prime factorization to find their
-# respective divisors, then construct a list to keep track of their repsective
-# divisors
+# This is more of a brute force method than I thought I would end up with
+# but there is some fun finding of prime numbers by realizing a triangle
+# number can always be expressed as the product of two smaller numbers.
+# Finding the primes from these numbers is the most inefficient part,
+# and it could be improved with a seive (of Eratosthenes or Atkin).
+
+from collections import Counter
 
 def main():
-    # iterate through the triangle numbers
     tri_num = 1
     i = 1
     while (True):
-        f_dict = find_primes(tri_num, i)
-        m_dict = multiples(f_dict)
+        dims = get_square_dim(tri_num, i)
+        primes = get_primes(dims)
+        multiples = mult(primes)
 
-        print(m_dict)
-        print(tri_num)
-        print()
-
-        if i > 10:
+        if (multiples > 500):
+            print(tri_num)
+            print(dims)
+            print(primes)
+            print(multiples)
             break
+
         tri_num += i + 1
         i += 1
 
-def find_primes(tri_num, i):
+    return 0
+
+
+def get_square_dim(tri_num, i):
     dim1 = 0
     dim2 = 0
 
@@ -32,38 +38,42 @@ def find_primes(tri_num, i):
         dim1 = i + 1
         dim2 = int(i / 2)
 
-    print('dims = ' + str(dim1) + ',' + str(dim2))
+    return [dim1, dim2]
 
-    return factors(dim1, dim2)
+def get_primes(dims):
+    primes = []
 
-def factors(dim1, dim2):
-    nums = {}
-
-    if (dim1 % 2) == 0 or (dim2 % 2) == 0:
-        nums[2] = 1
-
-    for i in range(1, dim1 + 1):
-        if (dim1 % i) == 0:
-            nums[i] = 1
-
-    for i in range(1, dim2 + 1):
-        if (dim2 % i) == 0:
-            nums[i] = 1
-
-    return nums
-
-def multiples(nums):
-    tmp_list = []
-    for base in nums.items():
-        for tmp in nums.items():
-            if base[0] == tmp[0]:
+    for dim in dims:
+        i = 2
+        while (i < (dim + 1)):
+            if dim % i == 0 and is_prime(i):
+                primes.append(i)
+                dim = int(dim / i)
+                i = 2
                 continue
-            tmp_list.append(base[0] * tmp[0])
+            if dim == 1:
+                break
+            i += 1
 
-    for item in tmp_list:
-        nums[item] = 1
+    return primes
 
-    return nums
+def is_prime(num):
+    if num % 2 == 0 and not num == 2:
+        return False
+
+    for i in range(3, num, 2):
+        if num % i == 0:
+            return False
+
+    return True
+
+def mult(primes):
+    total = 1
+
+    for val in Counter(primes).values():
+        total *= (val + 1)
+
+    return total
 
 
 if __name__ == '__main__':
