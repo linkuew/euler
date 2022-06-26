@@ -1,7 +1,7 @@
 # Just a temp makefile, will have to update it to be more streamlined
 # in the future
 CO=gcc -g -Wall
-elem=prob1 prob2 prob3 prob4 prob5 prob19
+elem=prob1 prob2 prob3 prob4 prob5 prob19 prob22
 
 all: $(elem)
 
@@ -23,5 +23,8 @@ prob5:
 prob19:
 	$(CO) prob19.c -o nineteen
 
+prob22:
+	$(CO) prob22.c -o twentytwo
+
 clean:
-	rm one two three four five nineteen
+	rm one two three four five nineteen twentytwo
