@@ -32,7 +32,7 @@ int main(void)
                         }
 
                         if ((year_code + month_code + 2) % 7 == 0) {
-                                sundays = sundays + 1;
+                                sundays += 1;
                         }
                 }
         }
